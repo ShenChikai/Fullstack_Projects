@@ -19,4 +19,8 @@ public class ProjectTaskService {
 
         return projectTaskRepository.save(projectTask);
     }
+
+    public Iterable<ProjectTask> findAll() {
+        return projectTaskRepository.findAll();
+    }
 }

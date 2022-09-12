@@ -8,4 +8,6 @@ import com.shen.playground.domain.ProjectTask;
 @Repository
 public interface ProjectTaskRepository extends CrudRepository<ProjectTask, Long> {
     
+    ProjectTask getById(Long id);
+    
 }

@@ -1,6 +1,7 @@
 package com.shen.playground.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.config.ProjectingArgumentResolverRegistrar;
 import org.springframework.stereotype.Service;
 
 import com.shen.playground.domain.ProjectTask;
@@ -22,5 +23,14 @@ public class ProjectTaskService {
 
     public Iterable<ProjectTask> findAll() {
         return projectTaskRepository.findAll();
+    }
+
+    public ProjectTask findById(Long id) {
+        return projectTaskRepository.getById(id);
+    }
+
+    public void delete(Long id) {
+        ProjectTask projectTask = this.findById(id);
+        projectTaskRepository.delete(projectTask);
     }
 }

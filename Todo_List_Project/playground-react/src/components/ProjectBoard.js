@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom"
+import ProjectTaskItem from './ProjectTask/ProjectTaskItem';
 
 class ProjectBoard extends Component {
   render() {
@@ -21,27 +22,11 @@ class ProjectBoard extends Component {
                     </div>
 
                     {/* <!-- SAMPLE PROJECT TASK STARTS HERE --> */}
-                    <div class="card mb-1 bg-light">
 
-                        <div class="card-header text-primary">
-                            ID: projectSequence
-                        </div>
-                        <div class="card-body bg-light">
-                            <h5 class="card-title">summary</h5>
-                            <p class="card-text text-truncate ">
-                                acceptanceCriteria
-                            </p>
-                            <a href="" class="btn btn-primary">
-                                View / Update
-                            </a>
-
-                            <button class="btn btn-danger ml-4">
-                                Delete
-                            </button>
-                        </div>
-                    </div>
+                    <ProjectTaskItem />
 
                     {/* <!-- SAMPLE PROJECT TASK ENDS HERE --> */}
+                    
                 </div>
                 <div class="col-md-4">
                     <div class="card text-center mb-2">

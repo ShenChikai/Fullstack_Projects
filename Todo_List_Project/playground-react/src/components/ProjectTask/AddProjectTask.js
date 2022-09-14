@@ -2,6 +2,38 @@ import React, { Component } from 'react'
 import {Link} from "react-router-dom"
 
 export default class AddProjectTask extends Component {
+    // constructor
+    constructor() {
+        super()
+        // set state to save the values
+        this.state = {
+            summary: "",
+            acceptanceCriteria: "",
+            status: ""
+        };
+        // pass event handler to components using "bind"
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    // onChange event function
+    onChange(e) {
+        this.setState({[e.target.name] : e.target.value})
+    }
+
+    // onSubmit event function
+    onSubmit(e) {
+        // prevent page refresh
+        e.preventDefault();
+        // create the newProjectTask Project
+        const newProjectTask = {
+            summary: this.state.summary,
+            acceptanceCriteria: this.state.acceptanceCriteria,
+            status: this.state.status
+        }
+        console.log(newProjectTask);
+    }
+
   render() {
     return (
         <div className="addProjectTask">
@@ -12,15 +44,33 @@ export default class AddProjectTask extends Component {
                             Back to Board
                         </Link>
                         <h4 className="display-4 text-center">Add Project Task</h4>
-                        <form>
+                        <form onSubmit={this.onSubmit}>
                             <div className="form-group">
-                                <input type="text" className="form-control form-control-lg" name="summary" placeholder="Project Task summary" />
+                                <input 
+                                    type="text" 
+                                    className="form-control form-control-lg" 
+                                    name="summary" 
+                                    placeholder="Project Task summary" 
+                                    value = {this.state.summary}
+                                    onChange = {this.onChange}
+                                />
                             </div>
                             <div className="form-group">
-                                <textarea className="form-control form-control-lg" placeholder="Acceptance Criteria" name="acceptanceCriteria"></textarea>
+                                <textarea 
+                                    className="form-control form-control-lg" 
+                                    placeholder="Acceptance Criteria" 
+                                    name="acceptanceCriteria"
+                                    value = {this.state.acceptanceCriteria}
+                                    onChange = {this.onChange}
+                                ></textarea>
                             </div>
                             <div className="form-group">
-                                <select className="form-control form-control-lg" name="status">
+                                <select 
+                                    className="form-control form-control-lg" 
+                                    name="status"
+                                    value = {this.state.status}
+                                    onChange = {this.onChange}
+                                >
                                     <option value="">Select Status</option>
                                     <option value="TO_DO">TO DO</option>
                                     <option value="IN_PROGRESS">IN PROGRESS</option>

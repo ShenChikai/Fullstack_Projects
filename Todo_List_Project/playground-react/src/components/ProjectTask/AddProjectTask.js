@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import classNames from "classnames";
+import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { addProjectTask } from '../../actions/projectTaskActions';
 
-export default class AddProjectTask extends Component {
+
+class AddProjectTask extends Component {
     // constructor
     constructor() {
         super()
@@ -15,7 +20,7 @@ export default class AddProjectTask extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-
+    
     // onChange event function
     onChange(e) {
         this.setState({[e.target.name] : e.target.value})
@@ -31,7 +36,10 @@ export default class AddProjectTask extends Component {
             acceptanceCriteria: this.state.acceptanceCriteria,
             status: this.state.status
         }
-        console.log(newProjectTask);
+        // save in db
+        this.props.addProjectTask(newProjectTask,);
+        // navigate back to home (don't know what to do here)
+        //this.props.navigation.navigate('/')
     }
 
   render() {
@@ -86,3 +94,16 @@ export default class AddProjectTask extends Component {
     )
   }
 }
+
+// what we need for this component to work?
+AddProjectTask.propTypes = {
+    addProjectTask: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired,
+}
+
+// map things in state to props
+const mapStateToProps = state => ({
+    errors: state.errors,
+})
+
+export default connect(mapStateToProps, {addProjectTask}) (AddProjectTask);

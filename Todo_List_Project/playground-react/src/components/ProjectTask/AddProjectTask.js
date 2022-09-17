@@ -4,7 +4,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { addProjectTask } from '../../actions/projectTaskActions';
-
+import { Navigate } from "react-router-dom";
 
 class AddProjectTask extends Component {
     // constructor
@@ -14,7 +14,8 @@ class AddProjectTask extends Component {
         this.state = {
             summary: "",
             acceptanceCriteria: "",
-            status: ""
+            status: "",
+            sumbitted: false,
         };
         // pass event handler to components using "bind"
         this.onChange = this.onChange.bind(this);
@@ -38,13 +39,22 @@ class AddProjectTask extends Component {
         }
         // save in db
         this.props.addProjectTask(newProjectTask,);
-        // navigate back to home (don't know what to do here)
+        // navigate back to home 
+        // (Update: I don't think this is an optimal solution to navigate using Navigate component, 
+        //      but this is the simplist solution I have for now)
         //this.props.navigation.navigate('/')
+        this.setState({sumbitted: true});
     }
 
   render() {
+    let sumbitted = this.state.sumbitted;   // defined the submitted checker here in render
     return (
         <div className="addProjectTask">
+            { 
+                // navigate back to home when sumbitted 
+                sumbitted && (<Navigate to="/" replace={true} /> )
+            }
+
             <div className="container">
                 <div className="row">
                     <div className="col-md-8 m-auto">

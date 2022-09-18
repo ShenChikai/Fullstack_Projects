@@ -1,6 +1,6 @@
 import { GET_ERRORS } from "../actions/type";
 
-const initialState = {error: "initial no err"};
+const initialState = {};
 
 export default function(state = initialState, action) {
     switch (action.type) {

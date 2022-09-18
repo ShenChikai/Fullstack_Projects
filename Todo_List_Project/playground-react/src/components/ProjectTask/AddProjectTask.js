@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
-import classNames from "classnames";
+import classnames from "classnames";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { addProjectTask } from '../../actions/projectTaskActions';
@@ -16,19 +16,27 @@ class AddProjectTask extends Component {
             acceptanceCriteria: "",
             status: "",
             sumbitted: false,
+            errors: {},
         };
         // pass event handler to components using "bind"
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-    
+
+    // load errors from props to state if changed
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.errors!==this.props.errors){
+            this.setState({errors: this.props.errors});
+        }
+    }
+
     // onChange event function
     onChange(e) {
         this.setState({[e.target.name] : e.target.value})
     }
 
     // onSubmit event function
-    onSubmit(e) {
+    async onSubmit(e) {
         // prevent page refresh
         e.preventDefault();
         // create the newProjectTask Project
@@ -38,16 +46,17 @@ class AddProjectTask extends Component {
             status: this.state.status
         }
         // save in db
-        this.props.addProjectTask(newProjectTask,);
+        let checker = await this.props.addProjectTask(newProjectTask);
         // navigate back to home 
         // (Update: I don't think this is an optimal solution to navigate using Navigate component, 
         //      but this is the simplist solution I have for now)
         //this.props.navigation.navigate('/')
-        this.setState({sumbitted: true});
+        this.setState({sumbitted: checker});
     }
 
   render() {
     let sumbitted = this.state.sumbitted;   // defined the submitted checker here in render
+    const { errors } = this.state;
     return (
         <div className="addProjectTask">
             { 
@@ -66,12 +75,17 @@ class AddProjectTask extends Component {
                             <div className="form-group">
                                 <input 
                                     type="text" 
-                                    className="form-control form-control-lg" 
+                                    className={classnames("form-control form-control-lg", {
+                                        "is-invalid": errors.summary
+                                    })}
                                     name="summary" 
                                     placeholder="Project Task summary" 
                                     value = {this.state.summary}
                                     onChange = {this.onChange}
                                 />
+                                {errors.summary && (
+                                    <div className='invalid-feedback'> {errors.summary} </div>
+                                )}
                             </div>
                             <div className="form-group">
                                 <textarea 

@@ -12,6 +12,11 @@
 
 - Credit to Agile Intelligence for the tutorial
 
+## Instruction
+- For the Frontend React: ``` npm start ``` 
+- For the Backend Spring, please run in an IDE of your choice, and it's hosted on Localhost.
+
+
 ## Tech:
 
 - Backend **Spring**:

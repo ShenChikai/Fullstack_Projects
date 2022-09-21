@@ -20,7 +20,7 @@
 ## Tech:
 
 - Backend **Spring**:
-> - Sprintboot
+> - Springboot
 > - Maven Compiler
 > - Spring web MVC
 > - H2 Database

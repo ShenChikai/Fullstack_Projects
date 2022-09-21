@@ -1,16 +1,17 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import classnames from "classnames";
 
 export default function Navbar() {
   return (
     // <!-- NavBar Component Code -->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
-        <div class="container">
-            <Link class="navbar-brand" to="/">
+    <nav className ="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
+        <div className ="container">
+            <Link className ="navbar-brand" to="/">
                 Project Task Tool
             </Link>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-                <span class="navbar-toggler-icon" />
+            <button className ="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+                <span className ="navbar-toggler-icon" />
             </button>
         </div>
     </nav>
